@@ -1,0 +1,185 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  /* background-image: url('background.jpeg'); */
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.top-nav {
+  background-color: #333333;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.top-nav .navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: goldenrod;
+}
+
+.top-nav .navbar-brand span {
+  color: blue;
+}
+
+.top-nav .navbar-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.top-nav .nav-item {
+  margin-left: 20px;
+}
+
+.top-nav .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.top-nav .nav-link:hover {
+  background-color: #111111;
+}
+
+.top-nav .search-form {
+  display: flex;
+  align-items: center;
+}
+
+.top-nav .search-form input[type="text"] {
+  width: 300px;
+  height: 32px;
+  background-color: #ffffff;
+  border: 2px solid salmon;
+  border-radius: 16px;
+  padding: 4px 16px;
+  color: #333333;
+}
+
+.top-nav .search-form button {
+  background-color: #c4302b;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.top-nav .search-form button:hover {
+  background-color: #a62723;
+}
+.container {
+  padding: 20px; /* Add some padding to space out the cards */
+}
+
+.card {
+  width: 100%;
+  max-width: 300px;
+  height: 400px; /* Fixed height for the card */
+  margin: 20px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: goldenrod;
+  overflow: hidden; /* Ensure the card content doesn't overflow */
+}
+
+.card .movie-image {
+  width: 100%;
+  height: 75%; /* Adjust the height as needed, here we use 60% of the card's height */
+  background-size: contain; /* Scale the background image to fit the container */
+  background-position: center center; /* Center the background image both horizontally and vertically */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  border-radius: 10px 10px 0 0; /* Adjust the border radius to your desired style */
+  margin-bottom: 15px;
+}
+
+.card .card-body {
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: justify;
+}
+
+.card .card-body a {
+  color: white;
+}
+
+.page-container {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  background-image: url('background.jpeg');
+  background-color: rgba(0, 0, 0, 0.8);
+  background-blend-mode: multiply;
+  align-items: center;
+  color: white;
+}
+
+.page-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.page-info,
+.page-input-section {
+  display: flex;
+  align-items: center;
+}
+
+.page-info b {
+  display: block;
+  margin-right: 10px;
+}
+
+.page-input-section {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.page-input-section input {
+  width: 200px;
+  height: 32px;
+  margin: 0 5px;
+  padding: 4px 16px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 16px;
+}
+
+.page-input-section button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-image: url('background3.jpeg');
+  background-color: rgba(0, 0, 0, 0.8);
+  background-size: contain;
+  color: rgb(149, 65, 14);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.page-input-section button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #111111;
+}
+
+#word-container {
+  font-size: xx-large;
+}

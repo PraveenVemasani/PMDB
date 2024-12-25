@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ data.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='titlestyle.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='webpage-icon.png') }}" type="image/x-icon">
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body> 
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark top-nav">
+        <div class="container">
+            <a class="navbar-brand brand" href="{{ url_for('get_movies') }}">PMDB <span>Movies</span></a>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav nav-links">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('get_movies') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <form class="d-flex search-form" action="/movie" method="get">
+                <input class="form-control me-2" type="text" name="Movie" placeholder="Search Movie">
+                <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </nav>
+        
+    <div class="container">
+        <div class="row mt-5">
+            <!-- Left Section - Movie Poster -->
+            <div class="col-md-4 text-center">
+                <img src="https://image.tmdb.org/t/p/w500/{{ data.poster_path }}" alt="{{ data.title }} Poster" class="img-fluid movie-poster">
+            </div>
+            <!-- Right Section - Movie Information -->
+            <div class="col-md-8">
+                <h1>{{ data.title }}</h1>
+                <p><i class="fa fa-calendar"></i> {{ data.release_date }} (US) <i class="fas fa-film"></i>
+                    {% for genre in data.genres %}
+                        {{ genre.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                    <i class="fas fa-lightbulb"></i> {{ data.runtime }} minutes</p>
+                <div class="mb-4">
+                    <p><b>Vote Average:</b> <span id="voteAverage">{{ data.vote_average }}</span></p><i id="heartIcon" class="far fa-heart text-danger"></i>
+                    <p class="tagline">{{ data.tagline }}</p>
+                    <p><b>Overview:</b> {{ data.overview }}</p>
+                    <div class="d-flex align-items-center mt-3">
+                        {% if data.budget %}
+                        <div class="custom-budget"><b>Budget: </b>{{ "{:,}".format(data.budget) }}$</div>
+                        {% else %}
+                        <div class="custom-budget"><b>Budget: </b>-$</div>
+                        {% endif %}
+                        {% if data.revenue %}
+                        <div class="custom-collection"><b>Collection: </b>{{ "{:,}".format(data.revenue) }}$</div>
+                        {% else %}
+                        <div class="custom-budget"><b>Collection: </b>-$</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cast Section -->
+    <section class="cast-section">
+        <div class="container">
+            <h4 class="container-title">Cast</h4>
+            {% if cast.success=="false" %}
+                <h1>Hello {{ cast.status_message }}</h1>
+            {% else %}
+                <div class="cast-card-container">
+                    {% for i in cast %}
+                        <div class="cast-card">
+                            {% if i.profile_path is not none %}
+                            <img src="https://image.tmdb.org/t/p/w500/{{i.profile_path}}" alt="{{i.name}} Profile" class="cast-image">
+                            {% else %}
+                            <img src="{{ url_for('static', filename='no_profile.png') }}" alt="{{i.name}} Profile" class="cast-image">
+                            {% endif %}
+                            <div class="cast-description">
+                                <a href="{{ url_for('get_title', title_id=i.id,type='movie') }}">{{i.name}}</a>
+                                <p>{{i.character}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

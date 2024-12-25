@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="{{ url_for('static', filename='webpage-icon.png') }}" type="image/x-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="top-nav navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ url_for('get_movies') }}">PMDB<span>.Pro</span></a>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('get_movies') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+      </ul>
+      <form action="/movie" method="get" class="form-inline my-2 my-lg-0 search-form">
+        <input class="form-control mr-sm-2" type="text" name="Movie" placeholder="Search Movie.....">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+
+    {% if name.error=="Movie not found" %}
+      <h1>Hello {{ name.error }}</h1>
+    {% else %}
+      <div class="page-container">
+        <div class="page-content">
+          <div class="page-info">
+            <i>{{1+ 20*(page-1)}}-{{20*page}} of over {{total}} results for <i id="word-container"></i></i>
+          </div>
+          <div class="page-input-section">
+            <form action="{{ url_for('get_movie_details', movie_name=search) }}" method="get">
+              <input id="pageNumberInput" type="number" min="1" max="{{pages}}" name="page" placeholder="At Page:{{page}}/{{pages}} ">
+              <button id="page-sendButton" type="submit"><i class="far fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="row">
+          {% for i in name %}
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card">
+              <div class="movie-image" style="background-image: url('https://image.tmdb.org/t/p/w500/{{ i.poster_path }}');">
+              </div>
+              <div class="card-body">
+                <b style="font-size: large;">Movie:</b>
+                <a href="{{ url_for('get_title', title_id=i.id, type='movie') }}">{{ i.title }} ({{ i.release_date }})</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const wordElement = document.getElementById("word-container");
+      const word = "{{search}}......"; // Replace this with the desired word
+
+      let index = 0;
+      wordElement.innerHTML = "";
+      function showLetter() {
+        if (index < word.length) {
+          wordElement.innerHTML += word.charAt(index);
+          index++;
+          setTimeout(showLetter, 300); // Adjust the duration between each letter (in milliseconds)
+        }
+      }
+      showLetter();
+    });
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

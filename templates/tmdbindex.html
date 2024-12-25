@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='indexstyle.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="{{ url_for('static', filename='webpage-icon.png') }}" type="image/x-icon">
+</head>
+<body>
+
+  
+    <div class="top-nav">
+      <div class="brand">PMDB<span>.Pro</span></div>
+      <ul class="nav-links">
+          <li><a href="{{ url_for('get_movies') }}">Home</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+      </ul>
+      <form action="/movie" method="get" class="search-form">
+          <input type="text" name="Movie" placeholder="Search Movie">
+          <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+  </div>
+
+  <!-- Trending Movies -->
+  <h4 class="container-title">Trending Movies</h4>
+  {% if name_dis_movies.success=="false" %}
+    <h1>Hello {{ name_dis_movies.status_message }}</h1>
+  {% else %}
+    <div class="container">
+      {% for i in name_dis_movies %}
+      <div class="card">
+        <img src="https://image.tmdb.org/t/p/w500/{{i.poster_path}}" alt="No Poster Available" class="movie-image">
+        <div class="movie-description">
+          <a href="{{ url_for('get_title', title_id=i.id,type='movie') }}">{{i.title}}</a>
+          <p>{{i.release_date}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+<!-- End of Trending Movies -->
+
+
+<!-- Trending Tv Shows -->
+<h4 class="container-title">Trending Tv Shows</h4>
+  {% if name_dis_tv.success=="false" %}
+    <h1>Hello {{ name_dis_tv.status_message }}</h1>
+  {% else %}
+    <div class="container">
+      {% for i in name_dis_tv %}
+      <div class="card">
+        <img src="https://image.tmdb.org/t/p/w500/{{i.poster_path}}" alt="No Poster Available" class="movie-image">
+        <div class="movie-description">
+          <a href="{{ url_for('get_title', title_id=i.id,type='tv') }}">{{i.name}}</a>
+          <p>{{i.first_air_date}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+<!-- End  of Trending Tv Shows -->
+
+
+<!-- Now Playing Movies Section -->
+<h4 class="container-title">Now Playing In India</h4>
+  {% if now_playing_movies.success=="false" %}
+    <h1>Hello {{ now_playing_movies.status_message }}</h1>
+  {% else %}
+    <div class="container">
+      {% for i in now_playing_movies %}
+      <div class="card">
+        <img src="https://image.tmdb.org/t/p/w500/{{i.poster_path}}" alt="No Poster Available" class="movie-image">
+        <div class="movie-description">
+          <a href="{{ url_for('get_title', title_id=i.id,type='movie') }}">{{i.title}}</a>
+          <p>{{i.release_date}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+<!-- End of Now Playing Movies -->
+
+<!-- Now Playing Telugu Movies Section -->
+<h4 class="container-title">Romantic Movies</h4>
+  {% if name_playing_telugu.success=="false" %}
+    <h1>Hello {{ name_playing_telugu.status_message }}</h1>
+  {% else %}
+    <div class="container">
+      {% for i in name_playing_telugu %}
+      <div class="card">
+        <img src="https://image.tmdb.org/t/p/w500/{{i.poster_path}}" alt="No Poster Available" class="movie-image">
+        <div class="movie-description">
+          <a href="{{ url_for('get_title', title_id=i.id,type='movie') }}">{{i.title}}</a>
+          <p>{{i.release_date}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+<!-- End of Now Playing Telugu Movies -->
+
+
+<!-- Categories -->
+<h4 class="category-title">Categories</h4>
+{% if categories.success=="false" %}
+  <h1>Hello {{ categories.status_message }}</h1>
+{% else %}
+<div class="category-container">
+  {% for category in categories %}
+  <div class="category-card">
+    <div class="category-background" style="background-image: url('/static/{{ category.name }}.jpg');">
+      <div class="category-overlay">
+        <a href="{{ url_for('get_genre', genre_id=category.id) }}">{{ category.name }}</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endif %}
+<!-- End of Categories -->
+
+</body>
+
+
+<!-- Footer Section -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <p>PMDB<span>.Pro</span></p>
+    </div>
+    <div class="footer-description">
+      <p>Your go-to source for movie and TV show information.</p>
+    </div>
+    <div class="footer-company">
+      <p>This is a Praveen Company</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2023 PMDB.Pro. All rights reserved.</p>
+  </div>
+</footer>
+
+</html>
