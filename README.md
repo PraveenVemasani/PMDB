@@ -15,6 +15,8 @@ PMDB is a Flask-based web application that serves as a personal movie database. 
 
 - **Templates Folder**:
   - `Search.html`: Displays search results for movies or genres.
+  ![image](https://github.com/user-attachments/assets/6aa87cb1-4625-4b59-b5cd-b6455f2139bc)
+
   - `title.html`: Shows detailed information about a selected movie or TV show.
   ![image](https://github.com/user-attachments/assets/a3fc966b-51ab-4cec-89bc-f3b3beb74fbd)
 
