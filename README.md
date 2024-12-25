@@ -1,7 +1,7 @@
 # ADD.ME
 
 ## Project Name
-**Personal Movie Database (PMDB)**
+**Praveen Movie Database (PMDB)**
 
 ## Description
 PMDB is a Flask-based web application that serves as a personal movie database. It utilizes The Movie Database (TMDb) API to display information about movies, TV shows, and genres. Users can browse movies by genre, search for specific titles, and view detailed information about selected movies or shows.
@@ -32,7 +32,7 @@ PMDB is a Flask-based web application that serves as a personal movie database. 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/pmdb.git
+   git clone https://github.com/PraveenVemasani/pmdb.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -67,27 +67,10 @@ This project integrates with the following TMDb API endpoints:
 - Movie/TV Details: `/movie/{id}`, `/tv/{id}`
 - Movie/TV Credits: `/movie/{id}/credits`, `/tv/{id}/credits`
 
-## Contributing
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Description of changes"
-   ```
-4. Push to your branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Create a pull request.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 If you have any questions or suggestions, feel free to contact me:
 
-- Email: [your.email@example.com]
-- GitHub: [https://github.com/yourusername]
+- Email: [praveenchowdaryvemasani@gmail.com]
+- GitHub: [https://github.com/PraveenVemasani]
